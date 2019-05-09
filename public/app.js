@@ -48,7 +48,7 @@ class ConnectFour {
   checkForTie() {
     this.playCount++;
     if (this.playCount >= 42) return tie;
-    this.togglePiece();
+    // this.togglePiece();
 
     return null;
   }
@@ -79,18 +79,21 @@ class ConnectFour {
   checkCol(row, col) {
     let count = 1;
     let upRow = row + 1, downRow = row -1;
-    let currentCircle = this.board[upRow][col];
-    while (currentCircle === this.piece) {
-      if (++count >= this.winningCount ) return true;
-      currentCircle = this.board[++upRow][col]
+    let currentCircle;
+    if (this.board[upRow]){
+      currentCircle = this.board[upRow][col];
+      while (currentCircle === this.piece) {
+        if (++count >= this.winningCount ) return true;
+        if (!this.board[++upRow]) break;
+        currentCircle = this.board[upRow][col]
+      }
     }
-    if (this.board[downRow]){
+      if (this.board[downRow]){
       currentCircle = this.board[downRow][col];
       while (currentCircle === this.piece) {
         if (++count >= this.winningCount) return true;
-        if (this.board[--downRow]){
+        if (!this.board[--downRow]) break;
           currentCircle = this.board[downRow][col];
-        }
       }
     }
     return null;
@@ -100,16 +103,21 @@ class ConnectFour {
     let count = 1;
     let upRow = row + 1, upCol = col - 1;
     let downRow = row - 1, downCol = col + 1;
-    let currentCircle = this.board[upRow][upCol];
-    while (currentCircle === this.piece) {
-      if (++count >= this.winningCount) return true;
-      currentCircle = this.board[++upRow][--upCol];
+    let currentCircle;
+
+    if (this.board[upRow]) {
+      currentCircle = this.board[upRow][upCol];
+      while (currentCircle === this.piece) {
+        if (++count >= this.winningCount) return true;
+        if (!this.board[++upRow]) break;
+        currentCircle = this.board[upRow][--upCol];
+      }
     }
     if (this.board[downRow]) {
       currentCircle = this.board[downRow][downCol];
       while (currentCircle === this.piece) {
         if (++count >= this.winningCount) return true;
-        if (this.board[--downRow] === undefined) break;
+        if (!this.board[--downRow]) break;
           currentCircle = this.board[downRow][++downCol];
       }
     }
@@ -120,16 +128,21 @@ class ConnectFour {
     let count = 1;
     let upRow = row + 1, upCol = col + 1;
     let downRow = row - 1, downCol = col - 1;
-    let currentCircle = this.board[upRow][upCol];
-    while (currentCircle === this.piece) {
-      if (++count >= this.winningCount) return true;
-      currentCircle = this.board[++upRow][++upCol];
+    let currentCircle;
+
+    if (this.board[upRow]){
+      currentCircle = this.board[upRow][upCol]
+      while (currentCircle === this.piece) {
+        if (++count >= this.winningCount) return true;
+        if (!this.board[++upRow]) break;
+        currentCircle = this.board[upRow][++upCol];
+      }
     }
     if (this.board[downRow]) {
       currentCircle = this.board[downRow][downCol];
       while (currentCircle === this.piece) {
         if (++count >= this.winningCount) return true;
-        if (this.board[--downRow] === undefined) break;
+        if (!this.board[--downRow]) break;
           currentCircle = this.board[downRow][--downCol];
       }
     }
