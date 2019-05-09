@@ -63,7 +63,7 @@ class ConnectFour {
     let count = 1;
     let rightCol = col + 1, leftCol = col -1;
     let currentCircle = this.board[row][rightCol];
-    while (currentCirle === this.piece) {
+    while (currentCircle === this.piece) {
       if (++count >= this.winningCount) return true;
       currentCircle = this.board[row][++rightCol];
     }
@@ -84,11 +84,14 @@ class ConnectFour {
       if (++count >= this.winningCount ) return true;
       currentCircle = this.board[++upRow][col]
     }
-
-    currentCircle = this.board[downRow][col];
-    while (currentCircle === this.piece) {
-      if (++count >= this.winningCount) return true;
-      currentCircle = this.board[--downRow][col];
+    if (this.board[downRow]){
+      currentCircle = this.board[downRow][col];
+      while (currentCircle === this.piece) {
+        if (++count >= this.winningCount) return true;
+        if (this.board[--downRow]){
+          currentCircle = this.board[downRow][col];
+        }
+      }
     }
     return null;
   }
@@ -99,7 +102,6 @@ class ConnectFour {
     let downRow = row - 1, downCol = col + 1;
     let currentCircle = this.board[upRow][upCol];
     while (currentCircle === this.piece) {
-
       if (++count >= this.winningCount) return true;
       currentCircle = this.board[++upRow][--upCol];
     }
@@ -107,7 +109,8 @@ class ConnectFour {
       currentCircle = this.board[downRow][downCol];
       while (currentCircle === this.piece) {
         if (++count >= this.winningCount) return true;
-        currentCircle = this.board[--downRow][++downCol];
+        if (this.board[--downRow] === undefined) break;
+          currentCircle = this.board[downRow][++downCol];
       }
     }
     return null;
@@ -126,14 +129,15 @@ class ConnectFour {
       currentCircle = this.board[downRow][downCol];
       while (currentCircle === this.piece) {
         if (++count >= this.winningCount) return true;
-        currentCircle = this.board[--downRow][--downCol];
+        if (this.board[--downRow] === undefined) break;
+          currentCircle = this.board[downRow][--downCol];
       }
     }
     return null;
   }
 
   checkForWin(row, col) {
-    if (this.checkRow(row) || this.checkCol(row, col) || this.checkLeftDiagonal(row, col) || this.checkRightDiagonal(row, col)) {
+    if (this.checkRow(row, col) || this.checkCol(row, col) || this.checkLeftDiagonal(row, col) || this.checkRightDiagonal(row, col)) {
       return true;
     }
     return null;

@@ -12,7 +12,7 @@ app.listen(port, (err) => {
   console.log(`Express listening on port${port}`);
 });
 
-app.use(static, '/public');
+app.use(express.static(__dirname + '/public'));
 
 app.get('/', (req, res) => {
   res.sendStatus(200);
