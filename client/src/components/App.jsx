@@ -1,3 +1,5 @@
+import React from 'react';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -7,6 +9,12 @@ class App extends React.Component {
 
   placement() {
 
+  }
+
+  render() {
+    return (
+      <div>Hello from react component</div>
+    )
   }
 
 }
@@ -24,7 +32,7 @@ const Board = (props) => (
   </div>
 )
 
-const Row = (props) = (
+const Row = (props) => (
   <tr>
     <td></td>
     <td></td>
@@ -36,8 +44,4 @@ const Row = (props) = (
   </tr>
 );
 
-
-
-
-
-ReactDOM.render(<App />, document.getElementById('app'));
+ export default App;
