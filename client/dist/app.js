@@ -1,6 +1,5 @@
 /*_________CONSTANTS_____________*/
-let red = 'red';
-let black = 'black';
+
 let tie = 'tie';
 let winner = 'winner';
 
@@ -18,31 +17,14 @@ class ConnectFour {
       ['', '', '', ''],
       ['', '', '', '']
     ];
-    this.piece = black;
-    this.rowCount = {
-      0: 0,
-      1: 0,
-      2: 0,
-      3: 0,
-      4: 0,
-      5: 0,
-      6: 0
-    }
-    this.colCount = {
-      0: 0,
-      1: 0,
-      2: 0,
-      3: 0,
-      4: 0,
-      5: 0,
-      6: 0,
-      7: 0
-    }
+    this.red = 'red';
+    this.black = 'black'
+    this.piece = this.black;
     this.playCount = 0;
     this.winningCount = 4;
   }
   togglePiece() {
-    this.piece === 'black' ? this.piece = red : this.piece = black;
+    this.piece === 'black' ? this.piece = this.red : this.piece = this.black;
   }
 
   checkForTie() {

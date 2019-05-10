@@ -4,15 +4,10 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      row1: [],
-      row2: [],
-      row3: [],
-      row4: [],
-      row5: [],
-      row6: []
+      color: 'black'
     }
-    this.redPiece = this.redPiece.bind(this);
     this.toggleColor = this.toggleColor.bind(this);
+    this.placeBoard = this.placeBoard.bind(this);
   }
 
   toggleColor() {
@@ -23,22 +18,17 @@ class App extends React.Component {
     return currentColor;
   }
 
-  redPiece(row, col) {
-    this.setState({
-      row: col
-    })
+
+  placeBoard(row, col) {
+    console.log('Row: ', row);
+    console.log('Col: ', col);
   }
 
-  blackPiece(row, col) {
-    this.setState({
-      row: col
-    })
-  }
 
   render() {
     return (
       <div>
-        <Board toggleColor={this.toggleColor}/>
+        <Board placeBoard={this.placeBoard} toggleColor={this.toggleColor}/>
       </div>
     )
   }
@@ -52,21 +42,28 @@ const Board = (props) => (
   <div>
     <table>
       <tbody>
-        <Row toggleColor={props.toggleColor}/>
+        <Row class={"row0"} placeBoard={props.placeBoard} toggleColor={props.toggleColor}/>
+        <Row class={"row1"} placeBoard={props.placeBoard} toggleColor={props.toggleColor}/>
+        <Row class={"row2"} placeBoard={props.placeBoard} toggleColor={props.toggleColor}/>
+        <Row class={"row3"} placeBoard={props.placeBoard} toggleColor={props.toggleColor}/>
+        <Row class={"row4"} placeBoard={props.placeBoard} toggleColor={props.toggleColor}/>
+        <Row class={"row5"} placeBoard={props.placeBoard} toggleColor={props.toggleColor}/>
+        <Row class={"row6"} placeBoard={props.placeBoard} toggleColor={props.toggleColor}/>
       </tbody>
     </table>
   </div>
 )
 
+
 const Row = (props) => (
-  <tr className="row1">
-    <td className="1" onClick={()=>{$('.1').css('background-color', props.toggleColor())}}></td>
-    <td className="2"></td>
-    <td className="3"></td>
-    <td className="4"></td>
-    <td className="5"></td>
-    <td className="6"></td>
-    <td className="7"></td>
+  <tr className={`${props.class}`} onClick={(e)=>{props.placeBoard(e.currentTarget.classList[0].slice(-1), e.target.classList[0])}}>
+    <td className="6" onClick={()=>{$(`.${props.class} .6`).css('background-color', props.toggleColor())}}></td>
+    <td className="5" onClick={()=>{$(`.${props.class} .5`).css('background-color', props.toggleColor())}}></td>
+    <td className="4" onClick={()=>{$(`.${props.class} .4`).css('background-color', props.toggleColor())}}></td>
+    <td className="3" onClick={()=>{$(`.${props.class} .3`).css('background-color', props.toggleColor())}}></td>
+    <td className="2" onClick={()=>{$(`.${props.class} .2`).css('background-color', props.toggleColor())}}></td>
+    <td className="1" onClick={()=>{$(`.${props.class} .1`).css('background-color', props.toggleColor())}}></td>
+    <td className="0" onClick={()=>{$(`.${props.class} .0`).css('background-color', props.toggleColor())}}></td>
   </tr>
 );
 
